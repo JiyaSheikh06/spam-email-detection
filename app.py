@@ -11,6 +11,9 @@ from nltk.stem import PorterStemmer
 model = joblib.load("models/spam_model.pkl")
 tfidf = joblib.load("models/tfidf_vectorizer.pkl")
 
+# Download required NLTK data
+nltk.download('stopwords')
+
 # Text preprocessing
 stop_words = set(stopwords.words('english'))
 stemmer = PorterStemmer()
