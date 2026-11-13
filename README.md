@@ -106,7 +106,7 @@ Dataset: [Spam Mails Dataset — Kaggle](https://www.kaggle.com/datasets/venky73
 
 ## 🚀 Live Demo
 
-Coming soon — deployed using Streamlit Community Cloud.
+https://spam-detection-app-2026.streamlit.app/
 
 ## 👩‍💻 Author
 
