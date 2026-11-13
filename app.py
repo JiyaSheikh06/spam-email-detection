@@ -8,7 +8,7 @@ from nltk.stem import PorterStemmer
 
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(
-    page_title="MailGuard AI | Spam & Phishing Detector",
+    page_title="MailGuard AI | Spam Detector",
     page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -268,7 +268,7 @@ if page == "🔍 Threat Scanner":
     # Metrics Row
     c1, c2, c3, c4 = st.columns(4)
     kpis = [
-        ("Model Accuracy", "98.2%"),
+        ("Model Accuracy", "98.16%"),
         ("Feature Extraction", "TF-IDF"),
         ("Inference Latency", "< 15 ms"),
         ("Explainability", "Token XAI")
@@ -284,7 +284,6 @@ if page == "🔍 Threat Scanner":
 
     st.write("")
 
-    # Sample Test Buttons (Internship Friendly Names)
     st.markdown("**⚡ Quick Test Samples:**")
     b1, b2, b3 = st.columns([2, 2, 1])
     with b1:
@@ -353,7 +352,7 @@ if page == "🔍 Threat Scanner":
                         <span style="font-size:32px;">🚨</span>
                         <span style="background:rgba(239,68,68,0.25); color:#fca5a5; padding:4px 12px; border-radius:999px; font-size:12px; font-weight:700;">HIGH RISK</span>
                     </div>
-                    <h3 style="color:#fca5a5; margin:10px 0 6px 0; font-weight:800;">Spam / Phishing Detected</h3>
+                    <h3 style="color:#fca5a5; margin:10px 0 6px 0; font-weight:800;">Spam Detected</h3>
                     <p style="color:#cbd5e1; font-size:14px; line-height:1.5;">
                         This message exhibits high-risk promotional or deceptive linguistic patterns common in malicious payloads.
                     </p>
@@ -367,7 +366,7 @@ if page == "🔍 Threat Scanner":
                 <div class="result-safe">
                     <div style="display:flex; align-items:center; justify-content:space-between;">
                         <span style="font-size:32px;">🛡️</span>
-                        <span style="background:rgba(16,185,129,0.25); color:#6ee7b7; padding:4px 12px; border-radius:999px; font-size:12px; font-weight:700;">VERIFIED SAFE</span>
+                        <span style="background:rgba(16,185,129,0.25); color:#6ee7b7; padding:4px 12px; border-radius:999px; font-size:12px; font-weight:700;">PREDICTED NOT SPAM</span>
                     </div>
                     <h3 style="color:#6ee7b7; margin:10px 0 6px 0; font-weight:800;">Legitimate Communication</h3>
                     <p style="color:#cbd5e1; font-size:14px; line-height:1.5;">
