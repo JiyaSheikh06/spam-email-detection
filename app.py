@@ -5,6 +5,7 @@ import numpy as np
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
+import time
 
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(
@@ -72,7 +73,8 @@ defaults = {
     "confidence": 0.0,
     "cleaned_preview": "",
     "triggers": [],
-    "word_count": 0
+    "word_count": 0,
+    "latency": "< 15 ms"
 }
 for k, v in defaults.items():
     if k not in st.session_state:
@@ -320,6 +322,7 @@ if page == "🔍 Threat Scanner":
             if not email_text.strip():
                 st.warning("⚠️ Please provide email text or load a sample before running analysis.")
             else:
+                start_time = time.perf_counter()  # Timer start
                 cleaned = clean_text(email_text)
                 st.session_state.cleaned_preview = cleaned
                 st.session_state.word_count = len(email_text.split())
@@ -335,6 +338,10 @@ if page == "🔍 Threat Scanner":
 
                 st.session_state.prediction = "Spam" if pred == 1 else "Not Spam"
                 st.session_state.triggers = get_top_triggers(vector, top_n=6)
+
+                # Timer stop & save exact milliseconds
+                elapsed_ms = (time.perf_counter() - start_time) * 1000
+                st.session_state.latency = f"{elapsed_ms:.2f} ms"
 
     # Output Dashboard
     if st.session_state.prediction:
@@ -357,7 +364,8 @@ if page == "🔍 Threat Scanner":
                         This message exhibits high-risk promotional or deceptive linguistic patterns common in malicious payloads.
                     </p>
                     <div style="margin-top:14px; font-size:13px; color:#fca5a5; font-weight:700;">
-                        Model Confidence: {conf:.1f}%
+                        <span>Model Confidence: {conf:.1f}%</span>
+                        <span style="font-family:'JetBrains Mono', monospace; background:rgba(239,68,68,0.15); padding:2px 8px; border-radius:4px;">⚡ Inference: {st.session_state.latency}</span>
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
@@ -373,7 +381,8 @@ if page == "🔍 Threat Scanner":
                         No malicious triggers or spam signatures were identified. Vocabulary aligns with standard professional correspondence.
                     </p>
                     <div style="margin-top:14px; font-size:13px; color:#6ee7b7; font-weight:700;">
-                        Model Confidence: {conf:.1f}%
+                        <span>Model Confidence: {conf:.1f}%</span>
+                        <span style="font-family:'JetBrains Mono', monospace; background:rgba(16,185,129,0.15); padding:2px 8px; border-radius:4px;">⚡ Inference: {st.session_state.latency}</span>
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
